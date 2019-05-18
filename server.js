@@ -4,7 +4,7 @@ var fileSystem = require('fs');
 
 var app = express();
 
-app.listen(3000,function () {
+app.listen(3000, function () {
     console.log('Server is listening on port 3000. Ready to accept requests');
 });
 
@@ -44,12 +44,12 @@ app.use(formidable());
 //     var parsedFile = JSON.parse(file);
 // });
 
-app.post("/create-post", function (req,res) {
+app.post("/create-post", function (req, res) {
     // console.log('/create-post');
     // console.log(req.body);
-     console.log(req.fields.blogpost);
+    console.log(req.fields.blogpost);
 
-    fileSystem.readFile('data/posts.json',function (err,file) {
+    fileSystem.readFile('data/posts.json', function (err, file) {
         var parsedFile = JSON.parse(file);
 
         var time = Date.now();
@@ -57,9 +57,13 @@ app.post("/create-post", function (req,res) {
 
         console.log(parsedFile);
         // ? Read the file, append the new post and the write back/ save with appended post
-        // ! Stringfy and parse to go between json and js
-        fileSystem.writeFile('data/posts.json',JSON.stringify(parsedFile), function (err, file) {
+        // ! Stringify and parse to go between json and js
+        fileSystem.writeFile('data/posts.json', JSON.stringify(parsedFile), function (err, file) {
 
+        });
     });
+});
 
-})});
+app.get("/get-posts", function (req,res) {
+    res.sendFile(__dirname+'/data/posts.json');
+});
