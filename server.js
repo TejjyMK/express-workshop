@@ -11,3 +11,16 @@ app.get("/", function (req, res) {
 res.send("Yay Node Girls");
 });
 
+app.get("/chocolate", function (req,res) {
+    res.send("Mm chocolate :o");
+});
+
+// ? Challenge
+
+app.get("/node", function (req, res) {
+    res.send("Yo Node");
+});
+
+app.get("/girls", function (req, res) {
+    res.send("Sup Girls");
+});
