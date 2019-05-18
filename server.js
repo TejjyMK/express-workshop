@@ -1,4 +1,5 @@
 var express = require('express');
+var formidable = require('express-formidable');
 
 var app = express();
 
@@ -25,8 +26,13 @@ app.listen(3000,function () {
 //     res.send("Sup Girls");
 // });
 
+
 // ? serving static files
 app.use(express.static("public"));
+
+app.use(formidable())
 app.post("/create-post", function (req,res) {
     console.log('/create-post');
+    console.log(req.body);
+    console.log(req.fields);
 });
