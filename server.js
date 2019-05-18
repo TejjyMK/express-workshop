@@ -27,3 +27,6 @@ app.listen(3000,function () {
 
 // ? serving static files
 app.use(express.static("public"));
+app.post("/create-post", function (req,res) {
+    console.log('/create-post');
+});
