@@ -1,5 +1,6 @@
 var express = require('express');
 var formidable = require('express-formidable');
+var fileSystem = require('fs');
 
 var app = express();
 
@@ -30,9 +31,35 @@ app.listen(3000,function () {
 // ? serving static files
 app.use(express.static("public"));
 
-app.use(formidable())
+app.use(formidable());
+//
+// fileSystem.writeFile('data/posts.json',posts, function (err) {
+//
+// });
+//
+// fileSystem.readFile('data/posts.json', function (err, file) {
+//     // ? Making it human readable, without to string it is in buffer format
+//     console.log(file.toString());
+//
+//     var parsedFile = JSON.parse(file);
+// });
+
 app.post("/create-post", function (req,res) {
-    console.log('/create-post');
-    console.log(req.body);
-    console.log(req.fields);
-});
+    // console.log('/create-post');
+    // console.log(req.body);
+     console.log(req.fields.blogpost);
+
+    fileSystem.readFile('data/posts.json',function (err,file) {
+        var parsedFile = JSON.parse(file);
+
+        var time = Date.now();
+        parsedFile[time] = req.fields.blogpost;
+
+        console.log(parsedFile);
+        // ? Read the file, append the new post and the write back/ save with appended post
+        // ! Stringfy and parse to go between json and js
+        fileSystem.writeFile('data/posts.json',JSON.stringify(parsedFile), function (err, file) {
+
+    });
+
+})});
